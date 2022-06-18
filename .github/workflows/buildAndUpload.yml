@@ -1,4 +1,4 @@
-name: Java CI with Gradle & Upload to AWS S3
+name: Java CI with Gradle & Upload to AWS S3 & Slack notification
 
 on:
   push:
@@ -40,5 +40,14 @@ jobs:
     - name: Upload to S3
       run: aws s3 cp --region ${{ secrets.REGION }} ./${{ secrets.PROJECT }}.zip s3://${{ secrets.BUCKET }}/${{secrets.PROJECT}}.zip
       
+    - name: action-slack
+      uses: 8398a7/action-slack@v3
+      with:
+        status: ${{ job.status }}
+        author_name: Github Action Test
+        fields: repo,message,commit,author,action,eventName,ref,workflow,job,took
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK }}
+      if: always()
       
       
