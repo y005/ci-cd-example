@@ -37,6 +37,7 @@ Github action과 AWS 서비스를 사용한 CI/CD 파이프라인 실습 프로�
 #### 4. AWS CodeDeploy 세팅
 #### 5. AWS CodePipeline 세팅
 #### 6. Github action .yml 작성
+
 ---
 
 [Tutorial: Create a simple pipeline (S3 bucket)](https://docs.aws.amazon.com/codepipeline/latest/userguide/tutorials-simple-s3.html)
