@@ -11,7 +11,9 @@ CURRENT_PID=$(pgrep -fl action | grep java | awk '{print $1}')
 
 if [ -z $CURRENT_PID ]
 then
+  echo '종료해야 하는 자바 프로그램 없음'
 else
+  echo '종료 시켜야 되는 자바 프로그램 발견'
   kill -15 $CURRENT_PID
   sleep 5
 fi
