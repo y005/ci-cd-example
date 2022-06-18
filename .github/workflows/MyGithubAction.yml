@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: setting checkout
+    - name: Setting checkout
       uses: actions/checkout@v3
       
     - name: Set up JDK 11
@@ -18,7 +18,7 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         
-    - name: execution permission for gradlew
+    - name: Execution permission for gradlew
       run: chmod +x gradlew
       shell: bash
       
@@ -30,7 +30,7 @@ jobs:
       run: zip -qq -r ./${{secrets.PROJECT}}.zip .
       shell: bash
     
-    - name: Configure AWS
+    - name: Setting AWS CLI
       uses: aws-actions/configure-aws-credentials@v1
       with:
         aws-access-key-id: ${{ secrets.KEY }}
@@ -40,7 +40,7 @@ jobs:
     - name: Upload to S3
       run: aws s3 cp --region ${{ secrets.REGION }} ./${{ secrets.PROJECT }}.zip s3://${{ secrets.BUCKET }}/${{secrets.PROJECT}}.zip
       
-    - name: action-slack
+    - name: Slack Webhook
       uses: 8398a7/action-slack@v3
       with:
         status: ${{ job.status }}
