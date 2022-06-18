@@ -42,7 +42,60 @@ Github action과 AWS 서비스를 사용한 CI/CD 파이프라인 실습 프로�
 - Source Provider로 S3를 선택한 후 2의 버킷 이름과 배포할 프로젝트 이름을 입력한다.
 - Deploy Provider로 4의 CodeDeploy 애플리케이션 이름를 입력한다.
 #### 6. Github action .yml 작성
+```yml
+name: Java CI with Gradle & Upload to AWS S3
 
+//workflow가 시작되는 조건 정보
+on:
+  push:
+    branches: [ "main" ]
+
+//수행할 job 목록
+jobs:
+
+  //빌드와 업로드를 수행하는 job
+  build_upload:
+
+    //workflow를 수행할 서버의 운영체재 설정
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: setting checkout
+      uses: actions/checkout@v3
+      
+    //자바 개발 환경 설정      
+    - name: Set up JDK 11
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+
+    //gradlew에 대한 실행 권한 부여
+    - name: execution permission for gradlew
+      run: chmod +x gradlew
+      shell: bash
+      
+    - name: Build with Gradle
+      run: ./gradlew build
+      shell: bash
+      
+    //S3에 .zip 형태로 올려야 배포가 됨  
+    - name: Make zip file
+      run: zip -qq -r ./${{secrets.PROJECT}}.zip .
+      shell: bash
+      
+    //aws cli 사용을 위한 액세스 키 설정
+    - name: Configure AWS
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.KEY }}
+        aws-secret-access-key: ${{ secrets.SECRETE }}
+        aws-region: ${{ secrets.REGION }}
+        
+    - name: Upload to S3
+      run: aws s3 cp --region ${{ secrets.REGION }} ./${{ secrets.PROJECT }}.zip s3://${{ secrets.BUCKET }}/${{secrets.PROJECT}}.zip
+      
+```
 ---
 
 [Tutorial: Create a simple pipeline (S3 bucket)](https://docs.aws.amazon.com/codepipeline/latest/userguide/tutorials-simple-s3.html)
