@@ -35,7 +35,7 @@ Github action과 AWS 서비스를 사용한 CI/CD 파이프라인 실습 프로�
 #### 2. [AWS S3 버킷 생성](https://docs.aws.amazon.com/codepipeline/latest/userguide/tutorials-simple-s3.html#s3-create-s3-bucket)
 #### 3. [AWS EC2 생성](https://docs.aws.amazon.com/codepipeline/latest/userguide/tutorials-simple-codecommit.html#codecommit-create-deployment)
 - AmazonEC2RoleforAWSCodeDeploy 역할를 생성한 인스턴스에 부여해야 한다.
-- 생성한 인스턴스에 접속하여 CodeDeploy agent를 설치한다.
+- 생성한 인스턴스에 접속하여 CodeDeploy agent를 [설치](https://docs.aws.amazon.com/codedeploy/latest/userguide/codedeploy-agent-operations-install-linux.html)한다.
 #### 4. [AWS CodeDeploy 세팅](https://docs.aws.amazon.com/codepipeline/latest/userguide/tutorials-simple-s3.html#S3-create-deployment)
 - Amazon EC2를 설정하고 Name의 Key에는 3에서 생성한 인스턴스의 이름을 입력한다.
 #### 5. [AWS CodePipeline 세팅](https://docs.aws.amazon.com/codepipeline/latest/userguide/tutorials-simple-s3.html#s3-create-pipeline)
