@@ -52,7 +52,7 @@ sudo yum install java-1.8.0
 - Deploy Provider로 4의 CodeDeploy 애플리케이션 이름를 입력한다.
 #### 6. Github action .yml 작성
 ```yml
-name: Java CI with Gradle & Upload to AWS S3
+name: Java CI with Gradle & Upload to AWS S3 & Slack Notification
 
 //workflow가 시작되는 조건 정보
 on:
@@ -103,7 +103,18 @@ jobs:
         
     - name: Upload to S3
       run: aws s3 cp --region ${{ secrets.REGION }} ./${{ secrets.PROJECT }}.zip s3://${{ secrets.BUCKET }}/${{secrets.PROJECT}}.zip
-      
+
+    //slack 웹훅 이용
+    - name: Slack Webhook
+      uses: 8398a7/action-slack@v3
+      with:
+        status: ${{ job.status }}
+        author_name: Github Action Test
+        fields: repo,message,commit,author,action,eventName,ref,workflow,job,took
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK }}
+      if: always()
+
 ```
 #### 7. appspec.yml 생성
 EC2로 배포된 후 실행되어야 하는 동작을 정의한 스크립트를 작성해야 한다.
