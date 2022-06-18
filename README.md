@@ -43,6 +43,8 @@ sudo yum install ruby
 sudo yum install wget
 wget https://aws-codedeploy-ap-northeast-2.s3.ap-northeast-2.amazonaws.com/latest/install
 sudo yum install java-1.8.0
+chmod +x ./install
+sudo ./install auto
 ```
   
 #### 4. [AWS CodeDeploy 세팅](https://docs.aws.amazon.com/codepipeline/latest/userguide/tutorials-simple-s3.html#S3-create-deployment)
