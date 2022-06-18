@@ -118,11 +118,51 @@ jobs:
       if: always()
 
 ```
-#### 7. appspec.yml 생성
+#### 7. appspec.yml & deploy.sh 작성
 EC2로 배포된 후 실행되어야 하는 동작을 정의한 스크립트를 작성해야 한다.
 ```yml
+version: 0.0
+os: linux
+
+files:
+  - source: /
+    destination: /product
+permissions:
+  - object: /product/
+    owner: ec2-user
+    group: ec2-user
+    mode: 755
+hooks:
+  AfterInstall:
+    - location: deploy.sh
+      timeout: 60
+      runas: root
+```
+```bash
+#!/usr/bin/env bash
+
+REPOSITORY=/product
+cd $REPOSITORY
+
+JAR_NAME=$(ls $REPOSITORY/build/libs/ | grep '.jar' | tail -n 1)
+JAR_PATH=$REPOSITORY/build/libs/$JAR_NAME
+
+#현재 실행되고 있는 어플리케이션 pid 확인
+CURRENT_PID=$(pgrep -fl action | grep java | awk '{print $1}')
+
+if [ -z $CURRENT_PID ]
+then
+else
+  kill -15 $CURRENT_PID
+  sleep 5
+fi
+
+#배포된 파일을 백그라운드 모드로 실행하면서 로그아웃 후에도 프로세스가 죽지 않고 진행되고
+#실행 파일에 의해 발생되는 출력을 화면에 보이지 않게 하는 명령어
+nohup java -jar $JAR_PATH > /dev/null 2> /dev/null < /dev/null &
 
 ```
+
 ---
 
 [Tutorial: Create a simple pipeline (S3 bucket)](https://docs.aws.amazon.com/codepipeline/latest/userguide/tutorials-simple-s3.html)
