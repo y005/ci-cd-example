@@ -29,6 +29,14 @@ Github action과 AWS 서비스를 사용한 CI/CD 파이프라인 실습 프로�
 6. Build 과정은 건너뛰고 Deploy 과정 수행
 7. CodeDeploy에서 지정한 EC2에 빌드된 프로젝트 반영
 
+### 프로젝트 세팅 과정
+
+#### 1. AWS CLI access key 발급
+#### 2. AWS S3 세팅 
+#### 3. AWS EC2 세팅
+#### 4. AWS CodeDeploy 세팅
+#### 5. AWS CodePipeline 세팅
+#### 6. Github action .yml 작성
 ---
 
 [Tutorial: Create a simple pipeline (S3 bucket)](https://docs.aws.amazon.com/codepipeline/latest/userguide/tutorials-simple-s3.html)
