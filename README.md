@@ -31,11 +31,16 @@ Github action과 AWS 서비스를 사용한 CI/CD 파이프라인 실습 프로�
 
 ### 프로젝트 세팅 과정
 
-#### 1. AWS CLI access key 발급
-#### 2. AWS S3 세팅 
-#### 3. AWS EC2 세팅
-#### 4. AWS CodeDeploy 세팅
-#### 5. AWS CodePipeline 세팅
+#### 1. [AWS CLI access key 발급](https://docs.aws.amazon.com/accounts/latest/reference/root-user-access-key.html)
+#### 2. [AWS S3 버킷 생성](https://docs.aws.amazon.com/codepipeline/latest/userguide/tutorials-simple-s3.html#s3-create-s3-bucket)
+#### 3. [AWS EC2 생성](https://docs.aws.amazon.com/codepipeline/latest/userguide/tutorials-simple-codecommit.html#codecommit-create-deployment)
+- AmazonEC2RoleforAWSCodeDeploy 역할를 생성한 인스턴스에 부여해야 한다.
+- 생성한 인스턴스에 접속하여 CodeDeploy agent를 설치한다.
+#### 4. [AWS CodeDeploy 세팅](https://docs.aws.amazon.com/codepipeline/latest/userguide/tutorials-simple-s3.html#S3-create-deployment)
+- Amazon EC2를 설정하고 Name의 Key에는 3에서 생성한 인스턴스의 이름을 입력한다.
+#### 5. [AWS CodePipeline 세팅](https://docs.aws.amazon.com/codepipeline/latest/userguide/tutorials-simple-s3.html#s3-create-pipeline)
+- Source Provider로 S3를 선택한 후 2의 버킷 이름과 배포할 프로젝트 이름을 입력한다.
+- Deploy Provider로 4의 CodeDeploy 애플리케이션 이름를 입력한다.
 #### 6. Github action .yml 작성
 
 ---
