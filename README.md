@@ -36,6 +36,15 @@ Github action과 AWS 서비스를 사용한 CI/CD 파이프라인 실습 프로�
 #### 3. [AWS EC2 생성](https://docs.aws.amazon.com/codepipeline/latest/userguide/tutorials-simple-codecommit.html#codecommit-create-deployment)
 - AmazonEC2RoleforAWSCodeDeploy 역할를 생성한 인스턴스에 부여해야 한다.
 - 생성한 인스턴스에 접속하여 CodeDeploy agent를 [설치](https://docs.aws.amazon.com/codedeploy/latest/userguide/codedeploy-agent-operations-install-linux.html)한다.
+
+```cmd
+sudo yum update
+sudo yum install ruby
+sudo yum install wget
+wget https://aws-codedeploy-ap-northeast-2.s3.ap-northeast-2.amazonaws.com/latest/install
+sudo yum install java-1.8.0
+```
+  
 #### 4. [AWS CodeDeploy 세팅](https://docs.aws.amazon.com/codepipeline/latest/userguide/tutorials-simple-s3.html#S3-create-deployment)
 - Amazon EC2를 설정하고 Name의 Key에는 3에서 생성한 인스턴스의 이름을 입력한다.
 #### 5. [AWS CodePipeline 세팅](https://docs.aws.amazon.com/codepipeline/latest/userguide/tutorials-simple-s3.html#s3-create-pipeline)
@@ -96,9 +105,15 @@ jobs:
       run: aws s3 cp --region ${{ secrets.REGION }} ./${{ secrets.PROJECT }}.zip s3://${{ secrets.BUCKET }}/${{secrets.PROJECT}}.zip
       
 ```
+#### 7. appspec.yml 생성
+EC2로 배포된 후 실행되어야 하는 동작을 정의한 스크립트를 작성해야 한다.
+```yml
+
+```
 ---
 
 [Tutorial: Create a simple pipeline (S3 bucket)](https://docs.aws.amazon.com/codepipeline/latest/userguide/tutorials-simple-s3.html)
 
 [Create an Amazon EC2 Linux instance and install the CodeDeploy agent](https://docs.aws.amazon.com/codepipeline/latest/userguide/tutorials-simple-codecommit.html#codecommit-create-deployment)
+
 [github action과 aws code deploy를 이용하여 spring boot 배포하기](https://isntyet.github.io/deploy/github-action%EA%B3%BC-aws-code-deploy%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%98%EC%97%AC-spring-boot-%EB%B0%B0%ED%8F%AC%ED%95%98%EA%B8%B0(1)/)
