@@ -27,18 +27,18 @@ jobs:
       shell: bash
       
     - name: Make zip file
-      run: zip -qq -r ./$PROJECT.zip .
+      run: zip -qq -r ./${{secretes.PROJECT}}.zip .
       shell: bash
     
     - name: Configure AWS
       uses: aws-actions/configure-aws-credentials@v1
       with:
-        aws-access-key-id: $KEY
-        aws-secret-access-key: $SECRETE
-        aws-region: $REGION
+        aws-access-key-id: ${{ secretes.KEY }}
+        aws-secret-access-key: ${{ secretes.SECRETE }}
+        aws-region: ${{ secretes.REGION }}
         
     - name: Upload to S3
-      run: aws s3 cp --region $REGION ./$PROJECT.zip s3://$BUCKET/$GITHUB_SHA.zip
+      run: aws s3 cp --region ${{ secretes.REGION }} ./${{ secretes.PROJECT }} s3://${{ secrets.BUCKET }}/${{secretes.PROJECT}}.zip
       
       
       
