@@ -18,7 +18,7 @@ CodePipeLine의 배포 단계에서 선택하는 배포 제공자 서비스
 Github action과 AWS 서비스를 사용한 CI/CD 파이프라인 실습 프로젝트
 
 ### 사용기술
-`Java` `Spring Boot` `Gradle` `Github Action` `AWS EC2` `AWS S3` `AWS CodeDeploy` `AWS CodePipeline`
+`Spring Boot` `Github Action` `AWS EC2` `AWS S3` `AWS CodeDeploy` `AWS CodePipeline`
 
 ### CI/CD 파이프라인 동작 과정
 1. main branch에 push 이벤트 감지
