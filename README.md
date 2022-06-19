@@ -42,7 +42,7 @@ sudo yum update
 sudo yum install ruby
 sudo yum install wget
 wget https://aws-codedeploy-ap-northeast-2.s3.ap-northeast-2.amazonaws.com/latest/install
-sudo yum install java-1.8.0
+sudo yum install java-11-openjdk
 chmod +x ./install
 sudo ./install auto
 ```

@@ -20,8 +20,7 @@ fi
 
 #배포된 파일을 백그라운드 모드로 실행하면서 로그아웃 후에도 프로세스가 죽지 않고 진행되고
 #실행 파일에 의해 발생되는 출력을 화면에 보이지 않게 하는 명령어
-sudo nohup java -jar $JAR_PATH &
-
-mkdir $JAR_PATH
-mkdir $JAR_NAME
+nohup java -jar $REPOSITORY/$JAR_NAME 2>&1 &
+cat $JAR_PATH > file1
+cat $JAR_NAME > file2
 #nohup java -jar $JAR_PATH > /dev/null 2> /dev/null < /dev/null &
