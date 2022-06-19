@@ -8,7 +8,7 @@ JAR_PATH=$REPOSITORY/build/libs/$JAR_NAME
 
 #현재 실행되고 있는 어플리케이션 pid 확인
 #CURRENT_PID=$(pgrep -fl action | grep java | awk '{print $1}')
-CURRENT_PID = $(sudo netstat -tnlp | grep 8080 | gawk '{ print $7 }' | grep -o '[0-9]*')
+CURRENT_PID = $(netstat -tnlp | grep 8080 | gawk '{ print $7 }' | grep -o '[0-9]*')
 
 if [ -z $CURRENT_PID ]
 then
