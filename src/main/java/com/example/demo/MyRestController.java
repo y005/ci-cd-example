@@ -7,11 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class MyRestController {
   @GetMapping("/api/v1/test")
   public String start() {
-    return "hello :)";
-  }
-
-  @GetMapping("/api/v1/buy")
-  public String buy() {
-    return "buy :)";
+    return "hello world";
   }
 }
