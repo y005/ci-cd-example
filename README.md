@@ -152,7 +152,9 @@ CURRENT_PID=$(pgrep -fl action | grep java | awk '{print $1}')
 
 if [ -z $CURRENT_PID ]
 then
+  echo '프로그램 발견 안됨'
 else
+  echo '프로그램 발견됨'
   kill -15 $CURRENT_PID
   sleep 5
 fi
