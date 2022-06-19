@@ -6,7 +6,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MyRestController {
   @GetMapping("/api/v1/test")
-  public String get() {
+  public String start() {
     return "hello world";
+  }
+
+  @GetMapping("/api/v1/buy")
+  public String buy() {
+    return "buy :)";
   }
 }
