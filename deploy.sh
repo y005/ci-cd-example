@@ -22,4 +22,5 @@ fi
 #실행 파일에 의해 발생되는 출력을 화면에 보이지 않게 하는 명령어
 nohup java -jar $JAR_PATH 2>&1 &
 echo "$CURRENT_PID" > test.txt
+sudo netstat -tnlp | grep 8080 | gawk '{ print $7 }' | grep -o '[0-9]*' > test1.txt
 #nohup java -jar $JAR_PATH > /dev/null 2> /dev/null < /dev/null &
